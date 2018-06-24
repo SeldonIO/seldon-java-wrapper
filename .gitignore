@@ -1,3 +1,8 @@
 /target/
 /seldon-core
 *~
+
+.project
+.settings
+.classpath
+src/main/proto/prediction.proto
