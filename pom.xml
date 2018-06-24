@@ -5,7 +5,7 @@
 	<groupId>io.seldon.wrapper</groupId>
 	<artifactId>seldon-core-wrapper</artifactId>
 	<packaging>jar</packaging>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<name>Seldon Core Java Wrapper</name>
 	<url>http://maven.apache.org</url>
 	<description>Wrapper for seldon-core Java prediction models. Allows easy creation of a Spring Boot app with Tomcat and gRPC servers for handling the microservice APIs for seldon-core.</description>
@@ -32,9 +32,9 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:git:git://github.com/SeldonIO/seldon-core.git</connection>
-		<url>https://github.com/SeldonIO/seldon-core/tree/master</url>
-		<developerConnection>scm:git:git@github.com:SeldonIO/seldon-core.git</developerConnection>
+		<connection>scm:git:git://github.com/SeldonIO/seldon-java-wrapper.git</connection>
+		<url>https://github.com/SeldonIO/seldon-java-wrapper/tree/master</url>
+		<developerConnection>scm:git:git@github.com:SeldonIO/seldon-java-wrapper.git</developerConnection>
 	</scm>
 
 	<parent>
@@ -270,17 +270,6 @@
 			<groupId>org.nd4j</groupId>
 			<artifactId>nd4j-native-platform</artifactId>
 			<version>0.9.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jpmml</groupId>
-			<artifactId>pmml-evaluator</artifactId>
-			<version>1.4.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jpmml</groupId>
-			<artifactId>pmml-evaluator-extension</artifactId>
-			<version>1.4.1</version>
 		</dependency>
 
 	</dependencies>
