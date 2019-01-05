@@ -25,14 +25,16 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import io.grpc.Server;
-import io.grpc.ServerBuilder;
+import io.grpc.netty.NettyServerBuilder;
 import io.seldon.wrapper.api.SeldonPredictionService;
+import io.seldon.wrapper.config.AnnotationsConfig;
 
 @Component
 public class SeldonGrpcServer  {
     protected static Logger logger = LoggerFactory.getLogger(SeldonGrpcServer.class.getName());
 	
     public static final int SERVER_PORT = 5001;
+    private final String ANNOTATION_MAX_MESSAGE_SIZE = "seldon.io/grpc-max-message-size";
     
     private final int port;
     private final Server server;
@@ -40,22 +42,35 @@ public class SeldonGrpcServer  {
     private final SeldonPredictionService predictionService;
     
     @Autowired
-    public SeldonGrpcServer(SeldonPredictionService predictionService,@Value("${grpc.port}") Integer grpcPort)
+    public SeldonGrpcServer(AnnotationsConfig annotations,SeldonPredictionService predictionService,@Value("${grpc.port}") Integer grpcPort)
     {
     	logger.info("grpc port {}",grpcPort);
         
     	port = grpcPort;
           
         this.predictionService = predictionService;
-        server = ServerBuilder
+        NettyServerBuilder builder = NettyServerBuilder
                 .forPort(port)
                 .addService(new ModelService(this))
                 .addService(new RouterService(this))
                 .addService(new TransformerService(this))
                 .addService(new OutputTransformerService(this))
                 .addService(new CombinerService(this))
-                .addService(new GenericService(this))
-          .build();
+                .addService(new GenericService(this));
+        if (annotations.has(ANNOTATION_MAX_MESSAGE_SIZE))
+        {
+        	try 
+        	{
+        		int maxMessageSize =Integer.parseInt(annotations.get(ANNOTATION_MAX_MESSAGE_SIZE));
+        		logger.info("Setting max message to {}",maxMessageSize);
+        		builder.maxMessageSize(maxMessageSize);
+        	}
+        	catch(NumberFormatException e)
+        	{
+        		logger.warn("Failed to parse {} with value {}",ANNOTATION_MAX_MESSAGE_SIZE,annotations.get(ANNOTATION_MAX_MESSAGE_SIZE),e);
+        	}
+        }
+        server = builder.build();
     }
    
     
