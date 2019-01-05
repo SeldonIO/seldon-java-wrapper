@@ -6,3 +6,4 @@
 .settings
 .classpath
 src/main/proto/prediction.proto
+src/main/proto/tensorflow
