@@ -86,8 +86,9 @@ public class DL4JUtils {
 
 		if (oldData == null || oldData.getDataOneofCase() == DataOneofCase.TENSOR) {
 			Tensor.Builder tBuilder = Tensor.newBuilder();
-			List<Integer> shapeList = Arrays.stream(newData.shape()).boxed().collect(Collectors.toList());
-			tBuilder.addAllShape(shapeList);
+			List<Long> shapeList = Arrays.stream(newData.shape()).boxed().collect(Collectors.toList());
+			for(Long dim : shapeList)
+				tBuilder.addShape(dim.intValue());
 
 			for (int i = 0; i < shapeList.get(0); ++i) {
 				for (int j = 0; j < shapeList.get(1); ++j) {
