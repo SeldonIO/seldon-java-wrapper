@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 import io.seldon.protos.ModelGrpc;
 
 /**
- * Passes gRPC requests on to the engine.
+ * Passes gRPC requests on to the client prediction service.
  * @author clive
  *
  */
@@ -45,4 +45,11 @@ public class ModelService extends ModelGrpc.ModelImplBase  {
         responseObserver.onCompleted();
      }
     
+    @Override
+    public void sendFeedback(io.seldon.protos.PredictionProtos.Feedback request,
+            io.grpc.stub.StreamObserver<io.seldon.protos.PredictionProtos.SeldonMessage> responseObserver) {
+        logger.debug("Received sendFeedback request");
+        responseObserver.onNext(server.getPredictionService().sendFeedback(request));
+        responseObserver.onCompleted();
+    }
 }

@@ -6,21 +6,21 @@ import io.seldon.protos.PredictionProtos.SeldonMessageList;
 
 public interface SeldonPredictionService {
 	default public SeldonMessage predict(SeldonMessage request) {
-		return null;
+		return SeldonMessage.newBuilder().build();
 	}
 	default public SeldonMessage route(SeldonMessage request) {
-		return null;
+		return SeldonMessage.newBuilder().build();
 	}
 	default public SeldonMessage sendFeedback(Feedback request) {
-		return null;
+		return SeldonMessage.newBuilder().build();
 	}
 	default public SeldonMessage transformInput(SeldonMessage request) {
-		return null;
+		return SeldonMessage.newBuilder().build();
 	}
 	default public SeldonMessage transformOutput(SeldonMessage request) {
-		return null;
+		return SeldonMessage.newBuilder().build();
 	}
 	default public SeldonMessage aggregate(SeldonMessageList request) {
-		return null;
+		return SeldonMessage.newBuilder().build();
 	}
 }
