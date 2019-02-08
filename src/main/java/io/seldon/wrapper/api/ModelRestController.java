@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 
+import io.seldon.protos.PredictionProtos.Feedback;
 import io.seldon.protos.PredictionProtos.SeldonMessage;
 import io.seldon.wrapper.exception.APIException;
 import io.seldon.wrapper.exception.APIException.ApiExceptionType;
@@ -55,5 +56,32 @@ public class ModelRestController {
 		} 
 		
 
+	}
+	
+	@RequestMapping(value = "/send-feedback", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf-8")
+    public ResponseEntity<String> sendFeedback( @RequestParam("json") String json)
+	{
+		Feedback request;
+		try
+		{
+			Feedback.Builder builder = Feedback.newBuilder();
+			ProtoBufUtils.updateMessageBuilderFromJson(builder, json );
+			request = builder.build();
+		} 
+		catch (InvalidProtocolBufferException e) 
+		{
+			logger.error("Bad request",e);
+			throw new APIException(ApiExceptionType.WRAPPER_INVALID_MESSAGE,json);
+		}
+
+		try
+		{
+			SeldonMessage response = predictionService.sendFeedback(request);
+			String res = ProtoBufUtils.toJson(response);
+			return new ResponseEntity<String>(res,HttpStatus.OK);
+		}
+		catch (InvalidProtocolBufferException e) {
+			throw new APIException(ApiExceptionType.WRAPPER_INVALID_MESSAGE,"");
+		} 
 	}
 }
