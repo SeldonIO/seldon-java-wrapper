@@ -3,8 +3,6 @@ package io.seldon.wrapper.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.nd4j.linalg.dataset.api.iterator.CachingDataSetIterator;
-
 import com.google.protobuf.ListValue;
 import com.google.protobuf.Value;
 
@@ -17,8 +15,8 @@ import hex.genmodel.easy.prediction.MultinomialModelPrediction;
 import hex.genmodel.easy.prediction.OrdinalModelPrediction;
 import hex.genmodel.easy.prediction.RegressionModelPrediction;
 import io.seldon.protos.PredictionProtos.DefaultData;
-import io.seldon.protos.PredictionProtos.Tensor;
 import io.seldon.protos.PredictionProtos.DefaultData.DataOneofCase;
+import io.seldon.protos.PredictionProtos.Tensor;
 
 /**
  * Utilities for working with H2O models

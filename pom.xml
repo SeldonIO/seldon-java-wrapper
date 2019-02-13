@@ -5,7 +5,7 @@
 	<groupId>io.seldon.wrapper</groupId>
 	<artifactId>seldon-core-wrapper</artifactId>
 	<packaging>jar</packaging>
-	<version>0.1.4</version>
+	<version>0.1.5</version>
 	<name>Seldon Core Java Wrapper</name>
 	<url>http://maven.apache.org</url>
 	<description>Wrapper for seldon-core Java prediction models. Allows easy creation of a Spring Boot app with Tomcat and gRPC servers for handling the microservice APIs for seldon-core.</description>
@@ -47,7 +47,7 @@
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<grpc.version>1.0.0</grpc.version><!-- CURRENT_GRPC_VERSION -->
+		<grpc.version>1.5.0</grpc.version><!-- CURRENT_GRPC_VERSION -->
 		<micrometer.version>1.0.0-rc.1</micrometer.version>
 		<start-class>io.seldon.wrapper.App</start-class>
 	</properties>
@@ -109,10 +109,6 @@
 					<pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
 					<clearOutputDirectory>false</clearOutputDirectory>
 					<checkStaleness>true</checkStaleness>
-					<excludes>
-						<exclude>k8s.io/**/*.proto</exclude>
-						<exclude>**/v1.proto</exclude>
-					</excludes>
 				</configuration>
 				<executions>
 					<execution>
@@ -243,12 +239,12 @@
 		<dependency>
 			<groupId>com.google.protobuf</groupId>
 			<artifactId>protobuf-java</artifactId>
-			<version>3.2.0</version>
+			<version>3.5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.protobuf</groupId>
 			<artifactId>protobuf-java-util</artifactId>
-			<version>3.2.0rc2</version>
+			<version>3.5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -266,11 +262,7 @@
 			<artifactId>h2o-genmodel</artifactId>
 			<version>3.18.0.5</version>
 		</dependency>
-		<dependency>
-			<groupId>org.nd4j</groupId>
-			<artifactId>nd4j-native-platform</artifactId>
-			<version>1.0.0-beta3</version>
-		</dependency>
+		
 
 	</dependencies>
 
