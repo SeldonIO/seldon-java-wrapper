@@ -78,8 +78,8 @@ public class H2OUtils {
 						value = listValue.getStringValue();
 						break;
 					case BOOL_VALUE:
-						//Get value as String
-						value = listValue.getStringValue();
+						//Get value as Boolean
+						value = listValue.getBoolValue();
 						break;
 					case NULL_VALUE:
 						// Treat Nulls as 0
