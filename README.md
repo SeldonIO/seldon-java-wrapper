@@ -22,4 +22,4 @@ An example s2i build would be:
 s2i build --volume "$HOME/.m2":/root/.m2 model-template-app seldonio/seldon-core-s2i-java-build:0.1 myjavatest:0.1 --runtime-image seldonio/seldon-core-s2i-java-runtime:0.1
 ```
 
-[See the seldon-core docs for further information](https://github.com/SeldonIO/seldon-core/blob/master/docs/wrappers/java.md).
+[See the seldon-core docs for further information](https://docs.seldon.io/projects/seldon-core/en/latest/java/README.html).
